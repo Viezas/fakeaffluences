@@ -12,7 +12,10 @@
     <p>
     Bonjour {{ $email }},<br>
     Votre {{ $status }} à l'établissement : {{ $establishmentInfos['name'] }} le {{ $date }} pour le créneau horaire de {{ $time }} est confirmé !<br><br>
+    @if($status == 'réservation')
     token d'annulation : {{ $token }}
+    <a href="https://fakeaffluences.herokuapp.com/reservation/annulation/<?= $token ;?>">Annuler ma réservation</a>
+    @endif
     Très bonne journée à vous,<br>
     Cordialement,<br>
     L'équipe fakeaffluences7851
