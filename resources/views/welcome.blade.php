@@ -1,4 +1,4 @@
-@extends('Layouts.default')
+@extends('layouts.default')
 @section('content')
 
 @if ($token)
