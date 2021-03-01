@@ -24,8 +24,8 @@
     <input type="date" name="date" id="date" value="<?= old('date') ? old('date') : date("Y-m-d") ;?>" min="<?= date("Y-m-d");?>"/><br>
     <input type="time" name="time" id="time" value="<?= old('time') ? old('time') : date("H").":00" ;?>" step="01:00"/>
     <div id="cgu">
-      <input type="checkbox" name="cgu" id="cgu">
-      <label for="cgu">Accepter les <a href="#">conditions d'utilisation</a></label>
+      <input type="checkbox" name="cgu" id="cgu2">
+      <label for="cgu2">Accepter les <a href="#">conditions d'utilisation</a></label>
     </div>
     <button type="submit">Réserver mon créneau !</button>
   </form>

@@ -33,35 +33,35 @@ class ReservationController extends Controller
         $establishmentInfos = information::establishmentInfos();
 
         if(!(strlen($params["time"]) == 5) || !str_contains($params["time"], ':00')){
-            return redirect('reservation')->with('denied', "Le créneau horaire doit etre au format suivant : hh:00 !");
+            return redirect('reservation')->with('denied', "Le créneau horaire doit etre au format suivant : hh:00 !")->withInput();
         }
 
         if(in_array(date("D", strtotime($params["date"])), $rules['dayClose'])){
-            return redirect('reservation')->with('denied', "Le jour de réservation ne figure pas parmis les jours disponibles !");
+            return redirect('reservation')->with('denied', "Le jour de réservation ne figure pas parmis les jours disponibles !")->withInput();
         }
 
         if(date('H').':00' >= ($rules['max_hours'] - $rules['reservation_duration']).":00" && date('Y-m-d') >= $params['date']){
-            return redirect('reservation')->with('denied', "L'heure et/ou la date de réservation de votre créneau est invalid !");
+            return redirect('reservation')->with('denied', "L'heure et/ou la date de réservation de votre créneau est invalid !")->withInput();
         }
 
         if($params["time"] > ($rules['max_hours'] - $rules['reservation_duration']).":00"){
-            return redirect('reservation')->with('denied', "L'établissement : {$establishmentInfos['name']} étant ouvert de {$rules['min_hours']}h à {$rules['max_hours']}h, vous êtes prié de réserver un créneau horaire allant de jusqu'à un maximum {$rules['reservation_duration']}h avant l'heure de fermeture !");
+            return redirect('reservation')->with('denied', "L'établissement : {$establishmentInfos['name']} étant ouvert de {$rules['min_hours']}h à {$rules['max_hours']}h, vous êtes prié de réserver un créneau horaire allant de jusqu'à un maximum {$rules['reservation_duration']}h avant l'heure de fermeture !")->withInput();
         }
 
         if($params["time"] < $rules['min_hours'].":00"){
-            return redirect('reservation')->with('denied', "L'établissement : {$establishmentInfos['name']} étant ouvert de {$rules['min_hours']}h à {$rules['max_hours']}h, vous êtes prié de réserver un créneau horaire allant d'un minimum de {$rules['min_hours']}h !");
+            return redirect('reservation')->with('denied', "L'établissement : {$establishmentInfos['name']} étant ouvert de {$rules['min_hours']}h à {$rules['max_hours']}h, vous êtes prié de réserver un créneau horaire allant d'un minimum de {$rules['min_hours']}h !")->withInput();
         }
 
         $already_reserv = DB::table('reservations')->where('date', $params['date'])->where('reservation_hours', $params['time'])->where('email', $params['email'])->count();
         
         if($already_reserv >= 1){
-            return redirect('reservation')->with('denied', "Vous avez déjà réservé un créneau horaire avec cette adresse e-mail !");
+            return redirect('reservation')->with('denied', "Vous avez déjà réservé un créneau horaire avec cette adresse e-mail !")->withInput();
         }
 
         $nb_reserv = DB::table('reservations')->where('date', $params['date'])->where('reservation_hours', $params['time'])->count();
 
         if($nb_reserv >= 2){
-            return redirect('reservation')->with('denied', "Le nombre maximal de créneau disponible pour cette heure a déjà été atteinte ! Veuillez réessayer avec un autre créneau horaire !");
+            return redirect('reservation')->with('denied', "Le nombre maximal de créneau disponible pour cette heure a déjà été atteinte ! Veuillez réessayer avec un autre créneau horaire !")->withInput();
         }
 
         DB::table('reservations')->insert([
