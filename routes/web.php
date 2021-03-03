@@ -7,4 +7,4 @@ Route::get('/', [\App\Http\Controllers\IndexController::class, 'index'])->name('
 
 Route::get('/reservation', [\App\Http\Controllers\ReservationController::class, 'view'])->name('reservation');
 Route::post('/reservation', [\App\Http\Controllers\ReservationController::class, 'reserv',])->name('reservation.post');
-Route::get('/reservation/annulation/{token}', [\App\Http\Controllers\ReservationController::class, 'cancelReserv'])->name('cancel.reservation');
+Route::get('/reservation/annulation/{token}', [\App\Http\Controllers\ReservationController::class, 'cancelReserv'])->name('reservation.cancel');

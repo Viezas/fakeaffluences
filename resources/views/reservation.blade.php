@@ -20,11 +20,11 @@
   @endif
   <form action="" method="POST" class="reservation">
     @csrf
-    <input type="email" name="email" id="email" value="{{ old('email') }}" placeholder="E-mail" autofocus><br>
-    <input type="date" name="date" id="date" value="<?= old('date') ? old('date') : date("Y-m-d") ;?>" min="<?= date("Y-m-d");?>"/><br>
-    <input type="time" name="time" id="time" value="<?= old('time') ? old('time') : date("H").":00" ;?>" step="01:00"/>
+    <input type="email" name="email" id="email" value="{{ old('email') }}" placeholder="E-mail" autofocus required><br>
+    <input type="date" name="date" id="date" value="<?= old('date') ? old('date') : date("Y-m-d") ;?>" min="<?= date("Y-m-d");?>" required/><br>
+    <input type="time" name="time" id="time" value="<?= old('time') ? old('time') : date("H").":00" ;?>" step="01:00" required/>
     <div id="cgu">
-      <input type="checkbox" name="cgu" id="cgu2">
+      <input type="checkbox" name="cgu" id="cgu2" required>
       <label for="cgu2">Accepter les <a href="#">conditions d'utilisation</a></label>
     </div>
     <button type="submit">Réserver mon créneau !</button>

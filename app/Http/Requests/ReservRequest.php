@@ -27,7 +27,7 @@ class ReservRequest extends FormRequest
             'email' => 'required|email',
             'date' => 'required|date_format:"Y-m-d"',
             'time' => 'required',
-            'cgu' => 'required'
+            'cgu' => 'accepted'
         ];
     }
 }
