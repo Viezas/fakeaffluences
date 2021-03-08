@@ -21,4 +21,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/infos', [\App\Http\Controllers\ApiController::class, 'infos'])->name('api.infos');
 Route::post('/reservation', [\App\Http\Controllers\ApiController::class, 'booking'])->name('api.booking');
-Route::delete('/reservation/annulation/{token}', [\App\Http\Controllers\ApiController::class, 'cancelReserv'])->name('api.cancel');
+Route::get('/reservation/annulation/{token}', [\App\Http\Controllers\ApiController::class, 'cancelReserv'])->name('api.cancel');
