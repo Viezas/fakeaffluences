@@ -74,7 +74,8 @@ class ApiController extends Controller
             'status' => 'réservation',
             'smiley' => '（￣︶￣）↗',
             'title' => 'Réservation',
-            'subject' => "Votre réservation"
+            'subject' => "Votre réservation",
+            'route' => 'api'
         ];
 
         $insert = DB::table('reservations')->insert([
@@ -85,7 +86,7 @@ class ApiController extends Controller
         ]);
         if($insert){
             Mail::to($params['email'])->send(new Res_Can_Mail($params));
-            return response()->json(['error' => "Un email de confirmation vous a ete envoyee"], 200);
+            return response()->json(['success' => "Un email de confirmation vous a ete envoyee"], 200);
         }
         else{
             return response()->json(['error' => "Une erreur c'est produite lors de la réservation... Réessayer plus tard !"], 500);
@@ -112,7 +113,7 @@ class ApiController extends Controller
         $deleted = DB::table('reservations')->where('token', $token)->delete();
         if($deleted){
             Mail::to($params['email'])->send(new Res_Can_Mail($params));
-            return response()->json(['error' => "Nous vous confirmons la suppression de votre réservation !"], 200);
+            return response()->json(['success' => "Nous vous confirmons la suppression de votre réservation !"], 200);
         }
         return response()->json(['error' => "Impossible d'annuler la réservation... Un lien d'annulation vous a été envoyé par mail plus tôt ! Vous êtes prié de vous y reporter afin d'effectuer une nouvelle demande d'annulation ! En cas de nouvelle erreur, il se peut que vous ayez déjà annuler votre créneau !"], 500);
     }

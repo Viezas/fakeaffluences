@@ -26,7 +26,8 @@ class ReservationController extends Controller
             'status' => 'réservation',
             'smiley' => '（￣︶￣）↗',
             'title' => 'Réservation',
-            'subject' => "Votre réservation"
+            'subject' => "Votre réservation",
+            'route' => "web"
         ];
 
         $rules = information::reservationRulls();
