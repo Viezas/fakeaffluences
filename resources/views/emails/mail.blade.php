@@ -15,7 +15,7 @@
     @if($status == 'réservation' && $route == "web")
     <a href="https://fakeaffluences.herokuapp.com/reservation/annulation/<?= $token ;?>">Annuler ma réservation</a><br>
     @elseif(($status == 'réservation' && $route == "api"))
-    Votre token d'annulation : <?= $token ;?>
+    Votre code d'annulation : <?= $token ;?>
     @endif
     Très bonne journée à vous,<br>
     Cordialement,<br>
